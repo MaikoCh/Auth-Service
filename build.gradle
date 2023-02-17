@@ -16,4 +16,16 @@ dependencies {
 
 test {
     useTestNG()
+            {
+                suites 'src/test/resources/suites/testngfull.xml'
+             //  suites 'src/test/resources/suites/testngpositive.xml'
+             //   suites 'src/test/resources/suites/testngnegative.xml'
+
+                useDefaultListeners true
+                if(System.properties['group'])
+                {
+                    includeGoups System.properties['group']
+                }
+            }
+        ignoreFailures=true
 }

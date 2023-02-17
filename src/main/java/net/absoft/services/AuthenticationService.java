@@ -6,27 +6,35 @@ import java.util.regex.Pattern;
 import net.absoft.data.Response;
 import net.absoft.db.DbConnection;
 
-public class AuthenticationService {
+public class AuthenticationService
+{
 
   private static final SecureRandom secureRandom = new SecureRandom();
   private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
 
-  public Response authenticate(String email, String password) {
-    if(email == null || email.isEmpty()) {
+  public Response authenticate(String email, String password)
+  {
+    if(email == null || email.isEmpty())
+    {
       return new Response(400, "Email should not be empty string");
     }
 
-    if(!validateEmail(email)) {
+    if(!validateEmail(email))
+    {
       return new Response(400, "Invalid email");
     }
 
-    if(password == null || password.isEmpty()) {
+    if(password == null || password.isEmpty())
+    {
       return new Response(400, "Password should not be empty string");
     }
 
-    if(DbConnection.getInstance().authenticate(email, password)) {
+    if(DbConnection.getInstance().authenticate(email, password))
+    {
       return new Response(200, generateToken());
-    } else {
+    }
+    else
+    {
       return new Response(401, "Invalid email or password");
     }
   }
@@ -37,14 +45,16 @@ public class AuthenticationService {
    * @param emailAddress
    * @return true if email address matches regex
    */
-  private boolean validateEmail(String emailAddress) {
+  private boolean validateEmail(String emailAddress)
+  {
     final String REGEX_PATTERN = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     return Pattern.compile(REGEX_PATTERN)
         .matcher(emailAddress)
         .matches();
   }
 
-  private String generateToken() {
+  private String generateToken()
+  {
     byte[] randomBytes = new byte[24];
     secureRandom.nextBytes(randomBytes);
     return base64Encoder.encodeToString(randomBytes);

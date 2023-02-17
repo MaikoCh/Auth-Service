@@ -2,11 +2,13 @@ package net.absoft.data;
 
 import java.util.Objects;
 
-public class Response{
+public class Response
+{
   private int code;
   private String message;
 
-  public Response(int code, String message) {
+  public Response(int code, String message)
+  {
     this.code = code;
     this.message = message;
   }
@@ -20,11 +22,14 @@ public class Response{
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) {
+  public boolean equals(Object o)
+  {
+    if (this == o)
+    {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (o == null || getClass() != o.getClass())
+    {
       return false;
     }
     Response response = (Response) o;
@@ -32,12 +37,14 @@ public class Response{
   }
 
   @Override
-  public int hashCode() {
+  public int hashCode()
+  {
     return Objects.hash(code, message);
   }
 
   @Override
-  public String toString() {
+  public String toString()
+  {
     return "Response{" +
         "code=" + code +
         ", message='" + message + '\'' +
